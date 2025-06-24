@@ -152,6 +152,18 @@
             <p>&copy; 2025 Elegant Threads. All rights reserved.</p>
         </div>
     </footer>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+    window.netlifyIdentity.init();
+  }
+</script>
 
     <script src="js/main.js"></script>
     <script src="js/products.js"></script>
