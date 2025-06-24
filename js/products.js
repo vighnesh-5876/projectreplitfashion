@@ -33,9 +33,48 @@ async function loadProductsFromCMS() {
 // Fetch products from content files (simulated for static deployment)
 async function fetchProductsFromContent() {
     try {
-        // In a static site, this would be pre-generated during build
-        // For development, we'll show empty state with admin link
-        allProducts = [];
+        // Sample products for demonstration (in production, these would be loaded from CMS)
+        const sampleProducts = [
+            {
+                title: "Elegant Silk Banarasi Saree",
+                category: "sarees",
+                price: 4500,
+                image: "/static/uploads/silk-banarasi-saree.jpg",
+                description: "Traditional handwoven Banarasi silk saree with intricate gold zari work, perfect for weddings and special occasions.",
+                featured: true,
+                available: true,
+                tags: ["silk", "banarasi", "wedding", "traditional", "gold", "zari"],
+                date: "2025-06-24T12:00:00.000Z",
+                slug: "elegant-silk-banarasi-saree"
+            },
+            {
+                title: "Floral Print Cotton Kurti",
+                category: "kurtis",
+                price: 1200,
+                image: "/static/uploads/floral-cotton-kurti.jpg",
+                description: "Comfortable cotton kurti with beautiful floral prints, perfect for daily wear and casual occasions.",
+                featured: true,
+                available: true,
+                tags: ["cotton", "floral", "casual", "comfortable", "daily wear"],
+                date: "2025-06-24T11:00:00.000Z",
+                slug: "floral-print-cotton-kurti"
+            },
+            {
+                title: "Designer Embroidered Blouse",
+                category: "blouses",
+                price: 2800,
+                image: "/static/uploads/designer-embroidered-blouse.jpg",
+                description: "Intricately embroidered designer blouse with mirror work and beading, perfect to pair with sarees.",
+                featured: false,
+                available: true,
+                tags: ["embroidered", "designer", "mirror work", "beading", "saree blouse"],
+                date: "2025-06-24T10:00:00.000Z",
+                slug: "designer-embroidered-blouse"
+            }
+        ];
+        
+        allProducts = sampleProducts;
+        saveToLocalStorage('products', allProducts);
         displayProducts();
     } catch (error) {
         handleError(error, 'products-grid', 'Unable to load products. Please try again later.');

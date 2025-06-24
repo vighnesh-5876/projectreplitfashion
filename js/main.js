@@ -160,11 +160,8 @@ function createProductCard(product) {
         window.location.href = `product-detail.html?id=${encodeURIComponent(product.slug || product.title)}`;
     });
 
-    const imageUrl = product.image || '';
-    const imageElement = imageUrl ? 
-        `<img src="${imageUrl}" alt="${product.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-         <div class="product-placeholder-icon" style="display: none;"><i class="fas fa-image"></i></div>` :
-        `<div class="product-placeholder-icon"><i class="fas fa-image"></i></div>`;
+    // Use placeholder icon instead of broken image for demo
+    const imageElement = `<div class="product-placeholder-icon"><i class="fas fa-image"></i></div>`;
 
     productCard.innerHTML = `
         <div class="product-image">
