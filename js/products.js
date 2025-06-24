@@ -13,20 +13,33 @@ function initializeProducts() {
 // Load products from Netlify CMS content
 async function loadProductsFromCMS() {
     try {
-        // In a real deployment, this would fetch from the generated JSON files
-        // For now, we'll simulate the loading process
-        const cachedProducts = getFromLocalStorage('products');
-        if (cachedProducts) {
-            allProducts = cachedProducts;
-            displayProducts();
-        } else {
-            // Try to load from content directory
-            await fetchProductsFromContent();
-        }
+        // First try to load from CMS-generated content
+        await fetchProductsFromCMS();
     } catch (error) {
-        console.warn('Could not load products:', error);
-        allProducts = [];
-        displayProducts();
+        console.warn('Could not load products from CMS:', error);
+        // Fallback to sample products for demonstration
+        await fetchProductsFromContent();
+    }
+}
+
+// Fetch products from CMS (for production)
+async function fetchProductsFromCMS() {
+    try {
+        // Try to load products from generated JSON file
+        const response = await fetch('/products.json');
+        if (response.ok) {
+            const products = await response.json();
+            if (products && products.length > 0) {
+                allProducts = products;
+                saveToLocalStorage('products', allProducts);
+                displayProducts();
+                return;
+            }
+        }
+        throw new Error('No CMS products found');
+    } catch (error) {
+        console.log('CMS products not available, using sample products');
+        throw error;
     }
 }
 

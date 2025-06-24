@@ -5,6 +5,9 @@ backend:
 # Enable editorial workflow for content review
 publish_mode: editorial_workflow
 
+# Add a build hook to regenerate products.json when content changes
+# This will be automatically triggered when users publish content
+
 # Site URL for local development and production
 site_url: https://fashionfashionfashionreptile.netlify.app
 display_url: https://fashionfashionfashionreptile.netlify.app

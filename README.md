@@ -62,10 +62,27 @@ Access the admin panel at `/admin` to manage products and site settings.
 
 ### Post-Deployment Configuration
 
-1. **Update Site URL**: Edit `admin/config.yml` with your actual Netlify URL
-2. **Test Admin Access**: Visit `https://fashionfashionfashionreptile.netlify.app/admin`
-3. **Add Products**: Use the admin panel to add your first products
-4. **Customize Settings**: Update site information through the admin panel
+1. **Enable Netlify Identity**:
+   - Go to Site Settings > Identity in your Netlify dashboard
+   - Click "Enable Identity"
+   - Set registration to "Invite only"
+
+2. **Enable Git Gateway**:
+   - In Identity settings, enable "Git Gateway"
+   - This allows CMS to save content to your repository
+
+3. **Create Admin User**:
+   - Go to Identity tab > Invite users
+   - Enter your email address
+   - Accept the invitation and set password
+
+4. **Test Admin Access**: Visit `https://fashionfashionfashionreptile.netlify.app/admin`
+
+5. **Important**: After adding products via CMS:
+   - Products are saved as markdown files in `/content/products/`
+   - Netlify automatically rebuilds the site and runs `build-products.js`
+   - This generates `products.json` that the website reads
+   - New products should appear on the website after build completes
 
 ## Content Management
 
@@ -161,9 +178,11 @@ Update contact details in:
 
 ### Products Not Displaying
 
-1. Check product files in `content/products/`
-2. Verify correct YAML frontmatter format
-3. Clear browser cache
+1. Check if `products.json` exists in the root directory
+2. Verify product files exist in `content/products/`
+3. Check build logs in Netlify dashboard for errors
+4. Manually trigger a new build in Netlify if needed
+5. Clear browser cache and localStorage
 
 ### Images Not Loading
 

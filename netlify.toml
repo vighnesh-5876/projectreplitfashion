@@ -1,6 +1,7 @@
 [build]
   publish = "."
-  command = "echo 'No build command needed for static site'"
+  command = "npm install && node build-products.js"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "18"
@@ -8,6 +9,12 @@
 [[redirects]]
   from = "/admin/*"
   to = "/admin/index.html"
+  status = 200
+
+# Redirect for product detail pages (optional)
+[[redirects]]
+  from = "/product/:slug"
+  to = "/product-detail.html?id=:slug"
   status = 200
 
 [[headers]]
