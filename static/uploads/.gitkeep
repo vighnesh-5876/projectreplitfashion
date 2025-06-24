@@ -1,0 +1,2 @@
+# This file ensures the static/uploads directory is created
+# Product images and other media files will be uploaded here via Netlify CMS

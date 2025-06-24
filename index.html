@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant Threads - Fashion Designer</title>
+    <meta name="description" content="Discover beautiful Indian fashion with our collection of sarees, kurtis, and blouses. Handcrafted designs for the modern woman.">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1>Elegant Threads</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link active">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="products.html" class="nav-link">All Products</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">Categories <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sarees.html">Sarees</a></li>
+                            <li><a href="kurtis.html">Kurtis</a></li>
+                            <li><a href="blouses.html">Blouses</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Timeless Elegance</h1>
+                <p class="hero-subtitle">Discover the perfect blend of traditional Indian fashion and contemporary style</p>
+                <a href="products.html" class="cta-button">Explore Collection</a>
+            </div>
+            <div class="hero-background">
+                <div class="hero-pattern"></div>
+            </div>
+        </section>
+
+        <!-- Featured Categories -->
+        <section class="featured-categories">
+            <div class="container">
+                <h2 class="section-title">Our Collections</h2>
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-image">
+                            <i class="fas fa-tshirt category-icon"></i>
+                        </div>
+                        <h3>Sarees</h3>
+                        <p>Elegant traditional sarees for every occasion</p>
+                        <a href="sarees.html" class="category-link">View Collection</a>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-image">
+                            <i class="fas fa-female category-icon"></i>
+                        </div>
+                        <h3>Kurtis</h3>
+                        <p>Contemporary kurtis for the modern woman</p>
+                        <a href="kurtis.html" class="category-link">View Collection</a>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-image">
+                            <i class="fas fa-vest category-icon"></i>
+                        </div>
+                        <h3>Blouses</h3>
+                        <p>Stylish blouses to complete your look</p>
+                        <a href="blouses.html" class="category-link">View Collection</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="featured-products">
+            <div class="container">
+                <h2 class="section-title">Featured Products</h2>
+                <div class="products-grid" id="featured-products">
+                    <!-- Products will be loaded dynamically -->
+                    <div class="product-placeholder">
+                        <div class="placeholder-content">
+                            <i class="fas fa-images"></i>
+                            <p>Featured products will appear here</p>
+                            <a href="admin/index.html" class="admin-link">Add products via Admin Panel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <h2>About Elegant Threads</h2>
+                    <p>We are passionate about bringing you the finest in Indian fashion. Our collection features carefully curated sarees, kurtis, and blouses that celebrate the rich heritage of Indian textiles while embracing modern design sensibilities.</p>
+                    <p>Each piece in our collection is selected for its quality, craftsmanship, and timeless appeal. Whether you're looking for traditional wear for special occasions or contemporary pieces for everyday elegance, we have something beautiful for every woman.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@elegantthreads.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 9876543210</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Mumbai, Maharashtra, India</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Elegant Threads. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/products.js"></script>
+</body>
+</html>
