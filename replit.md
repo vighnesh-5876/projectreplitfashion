@@ -72,7 +72,7 @@ Elegant Threads is a static fashion website showcasing Indian traditional wear i
 ### Primary Deployment
 - **Netlify Hosting**: Configured for Netlify with CMS integration
 - **Automatic Builds**: Git-based deployment with automatic rebuilds on content changes
-- **Custom Domain**: Configured for `elegant-threads.netlify.app`
+- **Live Domain**: Deployed at `https://fashionfashionfashionreptile.netlify.app`
 
 ### Development Environment
 - **Local Server**: Python HTTP server or Node.js http-server for development
@@ -88,7 +88,9 @@ Elegant Threads is a static fashion website showcasing Indian traditional wear i
 
 ```
 Changelog:
-- June 24, 2025. Initial setup
+- June 24, 2025: Initial setup with complete Netlify CMS integration
+- June 24, 2025: Added sample products and full Netlify configuration
+- June 24, 2025: Updated configuration for live Netlify domain
 ```
 
 ## User Preferences

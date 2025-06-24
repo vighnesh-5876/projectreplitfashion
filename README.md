@@ -63,7 +63,7 @@ Access the admin panel at `/admin` to manage products and site settings.
 ### Post-Deployment Configuration
 
 1. **Update Site URL**: Edit `admin/config.yml` with your actual Netlify URL
-2. **Test Admin Access**: Visit `yourdomain.netlify.app/admin`
+2. **Test Admin Access**: Visit `https://fashionfashionfashionreptile.netlify.app/admin`
 3. **Add Products**: Use the admin panel to add your first products
 4. **Customize Settings**: Update site information through the admin panel
 

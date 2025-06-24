@@ -6,11 +6,11 @@ backend:
 publish_mode: editorial_workflow
 
 # Site URL for local development and production
-site_url: https://elegant-threads.netlify.app
-display_url: https://elegant-threads.netlify.app
+site_url: https://fashionfashionfashionreptile.netlify.app
+display_url: https://fashionfashionfashionreptile.netlify.app
 
 # Logo for the admin interface
-logo_url: https://elegant-threads.netlify.app/admin/logo.png
+logo_url: https://fashionfashionfashionreptile.netlify.app/admin/logo.png
 
 media_folder: static/uploads
 public_folder: /static/uploads
