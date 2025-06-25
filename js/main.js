@@ -160,8 +160,16 @@ function createProductCard(product) {
         window.location.href = `product-detail.html?id=${encodeURIComponent(product.slug || product.title)}`;
     });
 
-    // Use placeholder icon instead of broken image for demo
-    const imageElement = `<div class="product-placeholder-icon"><i class="fas fa-image"></i></div>`;
+    // Use actual product image or placeholder
+    const imageUrl = product.image;
+    let imageElement;
+    
+    if (imageUrl && imageUrl.trim() !== '') {
+        imageElement = `<img src="${imageUrl}" alt="${product.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                      <div class="product-placeholder-icon" style="display: none;"><i class="fas fa-image"></i></div>`;
+    } else {
+        imageElement = `<div class="product-placeholder-icon"><i class="fas fa-image"></i></div>`;
+    }
 
     productCard.innerHTML = `
         <div class="product-image">
