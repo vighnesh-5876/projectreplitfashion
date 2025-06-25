@@ -28,7 +28,8 @@ collections:
       - { label: "Title", name: "title", widget: "string", hint: "Product name (e.g., Silk Banarasi Saree)" }
       - { label: "Category", name: "category", widget: "select", options: ["sarees", "kurtis", "blouses"], hint: "Select the product category" }
       - { label: "Price", name: "price", widget: "number", value_type: "float", min: 0, hint: "Price in INR (e.g., 2500)" }
-      - { label: "Featured Image", name: "image", widget: "image", hint: "Main product image (recommended: 800x800px)" }
+      - { label: "Main Image", name: "image", widget: "image", hint: "Main product image (recommended: 800x800px)" }
+      - { label: "Additional Images", name: "gallery", widget: "list", required: false, field: { label: "Image", name: "image", widget: "image" }, hint: "Additional product images for gallery view" }
       - { label: "Description", name: "description", widget: "text", hint: "Brief product description for listings" }
       - { label: "Featured Product", name: "featured", widget: "boolean", default: false, hint: "Show on homepage featured section" }
       - { label: "Available for Sale", name: "available", widget: "boolean", default: true, hint: "Is this product currently available?" }
