@@ -317,10 +317,57 @@ function displayProductDetail(product) {
         categoryBreadcrumb.textContent = product.title;
     }
 
-    const imageUrl = product.image || '';
-    const imageElement = imageUrl ? 
-        `<img src="${imageUrl}" alt="${product.title}">` :
-        `<div class="product-placeholder-icon" style="font-size: 4rem; color: var(--text-lighter);"><i class="fas fa-image"></i></div>`;
+    // Create image gallery
+    const images = [];
+    if (product.image) images.push(product.image);
+    if (product.gallery && Array.isArray(product.gallery)) {
+        product.gallery.forEach(item => {
+            if (item.image) images.push(item.image);
+        });
+    }
+
+    let imageElement;
+    if (images.length > 0) {
+        if (images.length === 1) {
+            // Single image - no carousel needed
+            imageElement = `
+                <div class="single-image-container">
+                    <img src="${images[0]}" alt="${product.title}">
+                </div>
+            `;
+        } else {
+            // Multiple images - create carousel
+            imageElement = `
+                <div class="image-carousel">
+                    <div class="carousel-container">
+                        <button class="carousel-btn carousel-prev" onclick="changeCarouselImage(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="carousel-images">
+                            ${images.map((img, index) => 
+                                `<img src="${img}" alt="${product.title} ${index + 1}" class="carousel-image ${index === 0 ? 'active' : ''}" data-index="${index}">`
+                            ).join('')}
+                        </div>
+                        <button class="carousel-btn carousel-next" onclick="changeCarouselImage(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="carousel-indicators">
+                        ${images.map((img, index) => 
+                            `<span class="indicator ${index === 0 ? 'active' : ''}" onclick="goToCarouselImage(${index})" data-index="${index}"></span>`
+                        ).join('')}
+                    </div>
+                    <div class="image-thumbnails">
+                        ${images.map((img, index) => 
+                            `<img src="${img}" alt="${product.title} ${index + 1}" class="thumbnail ${index === 0 ? 'active' : ''}" onclick="goToCarouselImage(${index})" data-index="${index}">`
+                        ).join('')}
+                    </div>
+                </div>
+            `;
+        }
+    } else {
+        imageElement = `<div class="product-placeholder-icon" style="font-size: 4rem; color: var(--text-lighter);"><i class="fas fa-image"></i></div>`;
+    }
 
     container.innerHTML = `
         <div class="product-detail-image">
@@ -333,6 +380,7 @@ function displayProductDetail(product) {
             <div class="product-detail-description">
                 ${product.description || 'No description available.'}
             </div>
+            ${product.body ? `<div class="product-full-description">${markdownToHtml(product.body)}</div>` : ''}
             <div class="product-actions">
                 <a href="index.html#contact" class="cta-button">Contact for Purchase</a>
                 <a href="${product.category ? product.category.toLowerCase() + '.html' : 'products.html'}" class="btn-secondary">Back to ${product.category || 'Products'}</a>
@@ -342,6 +390,11 @@ function displayProductDetail(product) {
 
     // Update page title
     document.title = `${product.title} - Elegant Threads`;
+    
+    // Initialize carousel if multiple images
+    if (images.length > 1) {
+        setTimeout(() => initializeCarousel(), 100);
+    }
 }
 
 // Load related products
@@ -437,6 +490,81 @@ function updateFavoriteButtons() {
 function getUrlParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
+}
+
+// Carousel functionality
+let currentImageIndex = 0;
+let totalImages = 0;
+
+// Initialize carousel after product detail is loaded
+window.initializeCarousel = function() {
+    const carouselImages = document.querySelectorAll('.carousel-image');
+    totalImages = carouselImages.length;
+    currentImageIndex = 0;
+};
+
+// Change carousel image by direction (-1 for previous, 1 for next)
+window.changeCarouselImage = function(direction) {
+    const carouselImages = document.querySelectorAll('.carousel-image');
+    const indicators = document.querySelectorAll('.indicator');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    
+    if (carouselImages.length === 0) return;
+    
+    // Remove active class from current image
+    carouselImages[currentImageIndex].classList.remove('active');
+    indicators[currentImageIndex].classList.remove('active');
+    thumbnails[currentImageIndex].classList.remove('active');
+    
+    // Calculate new index
+    currentImageIndex += direction;
+    if (currentImageIndex >= carouselImages.length) {
+        currentImageIndex = 0;
+    } else if (currentImageIndex < 0) {
+        currentImageIndex = carouselImages.length - 1;
+    }
+    
+    // Add active class to new image
+    carouselImages[currentImageIndex].classList.add('active');
+    indicators[currentImageIndex].classList.add('active');
+    thumbnails[currentImageIndex].classList.add('active');
+};
+
+// Go to specific carousel image
+window.goToCarouselImage = function(index) {
+    const carouselImages = document.querySelectorAll('.carousel-image');
+    const indicators = document.querySelectorAll('.indicator');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    
+    if (carouselImages.length === 0 || index < 0 || index >= carouselImages.length) return;
+    
+    // Remove active class from current image
+    carouselImages[currentImageIndex].classList.remove('active');
+    indicators[currentImageIndex].classList.remove('active');
+    thumbnails[currentImageIndex].classList.remove('active');
+    
+    // Set new index
+    currentImageIndex = index;
+    
+    // Add active class to new image
+    carouselImages[currentImageIndex].classList.add('active');
+    indicators[currentImageIndex].classList.add('active');
+    thumbnails[currentImageIndex].classList.add('active');
+};
+
+// Simple markdown to HTML converter for product descriptions
+function markdownToHtml(markdown) {
+    return markdown
+        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        .replace(/^\- (.*$)/gim, '<li>$1</li>')
+        .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+        .replace(/\*(.*)\*/gim, '<em>$1</em>')
+        .replace(/\n\n/gim, '</p><p>')
+        .replace(/^(.*)$/gim, '<p>$1</p>')
+        .replace(/<p><li>/gim, '<ul><li>')
+        .replace(/<\/li><\/p>/gim, '</li></ul>');
 }
 
 // Export functions for global use

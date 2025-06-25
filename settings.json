@@ -1,0 +1,24 @@
+{
+  "title": "Elegant Threads",
+  "tagline": "Premium Indian Fashion",
+  "description": "Premium Indian fashion designer boutique specializing in traditional wear including sarees, kurtis, and blouses.",
+  "about_title": "About Elegant Threads",
+  "about_content": "Welcome to Elegant Threads, where tradition meets contemporary elegance. We specialize in curating the finest collection of Indian traditional wear, including exquisite sarees, comfortable kurtis, and designer blouses.\n\nEach piece in our collection is carefully selected for its quality, craftsmanship, and timeless appeal. Whether you're looking for something special for a wedding, festival, or everyday wear, we have the perfect outfit to make you feel confident and beautiful.\n\nWith years of experience in the fashion industry, we understand that every woman deserves to look and feel beautiful. Our collection features both classic designs and modern interpretations of traditional wear, ensuring there's something perfect for every occasion.",
+  "email": "contact@elegantthreads.com",
+  "phone": "+91 98765 43210",
+  "whatsapp": "+91 98765 43210",
+  "address": "123 Fashion Street, Mumbai, Maharashtra 400001, India",
+  "hours": "Monday - Saturday: 10:00 AM - 8:00 PM, Sunday: 12:00 PM - 6:00 PM",
+  "facebook": "",
+  "instagram": "",
+  "twitter": "",
+  "youtube": "",
+  "linkedin": "",
+  "colors": {
+    "primary": "#D4AF37",
+    "secondary": "#8B7355",
+    "background": "#FFFFFF",
+    "text": "#2C3E50",
+    "text_light": "#7F8C8D"
+  }
+}

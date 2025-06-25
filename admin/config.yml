@@ -26,9 +26,10 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string", hint: "Product name (e.g., Silk Banarasi Saree)" }
-      - { label: "Category", name: "category", widget: "select", options: ["sarees", "kurtis", "blouses"], hint: "Select the product category" }
+      - { label: "Category", name: "category", widget: "select", options: ["sarees", "kurtis", "blouses"], hint: "Select the product category (managed in Categories section)" }
       - { label: "Price", name: "price", widget: "number", value_type: "float", min: 0, hint: "Price in INR (e.g., 2500)" }
-      - { label: "Featured Image", name: "image", widget: "image", hint: "Main product image (recommended: 800x800px)" }
+      - { label: "Main Image", name: "image", widget: "image", hint: "Main product image (recommended: 800x800px)" }
+      - { label: "Additional Images", name: "gallery", widget: "list", required: false, field: { label: "Image", name: "image", widget: "image" }, hint: "Additional product images for gallery view" }
       - { label: "Description", name: "description", widget: "text", hint: "Brief product description for listings" }
       - { label: "Featured Product", name: "featured", widget: "boolean", default: false, hint: "Show on homepage featured section" }
       - { label: "Available for Sale", name: "available", widget: "boolean", default: true, hint: "Is this product currently available?" }
@@ -37,19 +38,45 @@ collections:
       - { label: "Detailed Description", name: "body", widget: "markdown", required: false, hint: "Full product details, care instructions, etc." }
 
   - name: "settings"
-    label: "Settings"
+    label: "Site Settings"
     files:
-      - label: "Site Settings"
+      - label: "Site Configuration"
         name: "site"
         file: "content/settings/site.md"
         fields:
-          - { label: "Site Title", name: "title", widget: "string" }
-          - { label: "Description", name: "description", widget: "text" }
-          - { label: "Contact Email", name: "email", widget: "string" }
-          - { label: "Phone", name: "phone", widget: "string" }
-          - { label: "Address", name: "address", widget: "text" }
-          - { label: "Social Links", name: "social", widget: "object", fields: [
-              { label: "Instagram", name: "instagram", widget: "string", required: false },
-              { label: "Facebook", name: "facebook", widget: "string", required: false },
-              { label: "Pinterest", name: "pinterest", widget: "string", required: false }
+          - { label: "Site Title", name: "title", widget: "string", default: "Elegant Threads", hint: "Main website name displayed in header and title" }
+          - { label: "Site Tagline", name: "tagline", widget: "string", default: "Premium Indian Fashion", hint: "Short tagline displayed under site name" }
+          - { label: "Site Description", name: "description", widget: "text", default: "Premium Indian fashion designer boutique specializing in traditional wear", hint: "Used for SEO and meta descriptions" }
+          - { label: "About Us Title", name: "about_title", widget: "string", default: "About Elegant Threads", hint: "Title for the about section" }
+          - { label: "About Us Content", name: "about_content", widget: "markdown", default: "We are a premium fashion boutique...", hint: "Main about us paragraph with your story" }
+          - { label: "Contact Email", name: "email", widget: "string", default: "contact@elegantthreads.com" }
+          - { label: "Phone Number", name: "phone", widget: "string", default: "+91 98765 43210" }
+          - { label: "WhatsApp Number", name: "whatsapp", widget: "string", required: false, hint: "WhatsApp number for customer contact" }
+          - { label: "Address", name: "address", widget: "text", default: "123 Fashion Street, Mumbai, India", hint: "Physical store address" }
+          - { label: "Business Hours", name: "hours", widget: "string", default: "Mon-Sat: 10AM-8PM, Sun: 12PM-6PM", hint: "Store operating hours" }
+          - { label: "Facebook URL", name: "facebook", widget: "string", required: false, hint: "Full Facebook page URL" }
+          - { label: "Instagram URL", name: "instagram", widget: "string", required: false, hint: "Full Instagram profile URL" }
+          - { label: "Twitter URL", name: "twitter", widget: "string", required: false, hint: "Full Twitter profile URL" }
+          - { label: "YouTube URL", name: "youtube", widget: "string", required: false, hint: "Full YouTube channel URL" }
+          - { label: "LinkedIn URL", name: "linkedin", widget: "string", required: false, hint: "Full LinkedIn profile URL" }
+          - { label: "Website Colors", name: "colors", widget: "object", fields: [
+              { label: "Primary Color", name: "primary", widget: "color", default: "#D4AF37", hint: "Main brand color used for buttons and accents" },
+              { label: "Secondary Color", name: "secondary", widget: "color", default: "#8B7355", hint: "Secondary brand color" },
+              { label: "Background Color", name: "background", widget: "color", default: "#FFFFFF", hint: "Main background color" },
+              { label: "Text Color", name: "text", widget: "color", default: "#2C3E50", hint: "Primary text color" },
+              { label: "Light Text Color", name: "text_light", widget: "color", default: "#7F8C8D", hint: "Secondary text color" }
+            ]}
+
+  - name: "categories"
+    label: "Product Categories"
+    files:
+      - label: "Category Management"
+        name: "categories"
+        file: "content/settings/categories.md"
+        fields:
+          - { label: "Categories List", name: "categories", widget: "list", fields: [
+              { label: "Category Name", name: "name", widget: "string", hint: "Display name (e.g., Sarees)" },
+              { label: "Category ID", name: "id", widget: "string", hint: "URL-friendly ID (e.g., sarees)" },
+              { label: "Description", name: "description", widget: "text", required: false, hint: "Category description" },
+              { label: "Featured", name: "featured", widget: "boolean", default: true, hint: "Show in main navigation" }
             ]}

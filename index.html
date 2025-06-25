@@ -109,12 +109,14 @@
         </section>
 
         <!-- About Section -->
-        <section class="about-section">
+        <section id="about" class="about-section">
             <div class="container">
                 <div class="about-content">
                     <h2>About Elegant Threads</h2>
-                    <p>We are passionate about bringing you the finest in Indian fashion. Our collection features carefully curated sarees, kurtis, and blouses that celebrate the rich heritage of Indian textiles while embracing modern design sensibilities.</p>
-                    <p>Each piece in our collection is selected for its quality, craftsmanship, and timeless appeal. Whether you're looking for traditional wear for special occasions or contemporary pieces for everyday elegance, we have something beautiful for every woman.</p>
+                    <div class="about-text">
+                        <p>We are passionate about bringing you the finest in Indian fashion. Our collection features carefully curated sarees, kurtis, and blouses that celebrate the rich heritage of Indian textiles while embracing modern design sensibilities.</p>
+                        <p>Each piece in our collection is selected for its quality, craftsmanship, and timeless appeal. Whether you're looking for traditional wear for special occasions or contemporary pieces for everyday elegance, we have something beautiful for every woman.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -128,21 +130,33 @@
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span>info@elegantthreads.com</span>
+                        <span class="contact-email">contact@elegantthreads.com</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
-                        <span>+91 9876543210</span>
+                        <span class="contact-phone">+91 98765 43210</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>Mumbai, Maharashtra, India</span>
+                        <span class="contact-address">123 Fashion Street, Mumbai, India</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span class="contact-hours">Mon-Sat: 10AM-8PM, Sun: 12PM-6PM</span>
+                    </div>
+                    <div class="contact-item whatsapp-contact" style="display: none;">
+                        <a href="#" class="whatsapp-link" style="color: #25D366; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp Us</span>
+                        </a>
                     </div>
                 </div>
                 <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+                    <a href="#" class="social-facebook" style="display: none;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-instagram" style="display: none;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-twitter" style="display: none;"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-youtube" style="display: none;"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-linkedin" style="display: none;"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
         </div>
@@ -156,6 +170,8 @@
 
     <script src="js/main.js"></script>
     <script src="js/products.js"></script>
+    <script src="js/categories.js"></script>
+    <script src="js/settings.js"></script>
     
     <script>
         // Netlify Identity Widget initialization
