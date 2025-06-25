@@ -317,10 +317,34 @@ function displayProductDetail(product) {
         categoryBreadcrumb.textContent = product.title;
     }
 
-    const imageUrl = product.image || '';
-    const imageElement = imageUrl ? 
-        `<img src="${imageUrl}" alt="${product.title}">` :
-        `<div class="product-placeholder-icon" style="font-size: 4rem; color: var(--text-lighter);"><i class="fas fa-image"></i></div>`;
+    // Create image gallery
+    const images = [];
+    if (product.image) images.push(product.image);
+    if (product.gallery && Array.isArray(product.gallery)) {
+        product.gallery.forEach(item => {
+            if (item.image) images.push(item.image);
+        });
+    }
+
+    let imageElement;
+    if (images.length > 0) {
+        const mainImage = images[0];
+        const thumbnails = images.length > 1 ? 
+            `<div class="image-thumbnails">
+                ${images.map((img, index) => 
+                    `<img src="${img}" alt="${product.title} ${index + 1}" class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeMainImage('${img}')">`
+                ).join('')}
+            </div>` : '';
+        
+        imageElement = `
+            <div class="main-image-container">
+                <img id="main-product-image" src="${mainImage}" alt="${product.title}">
+            </div>
+            ${thumbnails}
+        `;
+    } else {
+        imageElement = `<div class="product-placeholder-icon" style="font-size: 4rem; color: var(--text-lighter);"><i class="fas fa-image"></i></div>`;
+    }
 
     container.innerHTML = `
         <div class="product-detail-image">
@@ -333,6 +357,7 @@ function displayProductDetail(product) {
             <div class="product-detail-description">
                 ${product.description || 'No description available.'}
             </div>
+            ${product.body ? `<div class="product-full-description">${markdownToHtml(product.body)}</div>` : ''}
             <div class="product-actions">
                 <a href="index.html#contact" class="cta-button">Contact for Purchase</a>
                 <a href="${product.category ? product.category.toLowerCase() + '.html' : 'products.html'}" class="btn-secondary">Back to ${product.category || 'Products'}</a>
@@ -437,6 +462,38 @@ function updateFavoriteButtons() {
 function getUrlParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
+}
+
+// Helper function for changing main image in product detail
+window.changeMainImage = function(imageUrl) {
+    const mainImage = document.getElementById('main-product-image');
+    if (mainImage) {
+        mainImage.src = imageUrl;
+    }
+    
+    // Update active thumbnail
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    thumbnails.forEach(thumb => {
+        thumb.classList.remove('active');
+        if (thumb.src === imageUrl) {
+            thumb.classList.add('active');
+        }
+    });
+};
+
+// Simple markdown to HTML converter for product descriptions
+function markdownToHtml(markdown) {
+    return markdown
+        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        .replace(/^\- (.*$)/gim, '<li>$1</li>')
+        .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+        .replace(/\*(.*)\*/gim, '<em>$1</em>')
+        .replace(/\n\n/gim, '</p><p>')
+        .replace(/^(.*)$/gim, '<p>$1</p>')
+        .replace(/<p><li>/gim, '<ul><li>')
+        .replace(/<\/li><\/p>/gim, '</li></ul>');
 }
 
 // Export functions for global use
