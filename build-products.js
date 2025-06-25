@@ -1,104 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blouses Collection - Elegant Threads</title>
-    <meta name="description" content="Discover our collection of stylish blouses, perfect to pair with sarees or wear as standalone pieces. Traditional and modern designs.">
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <h1>Elegant Threads</h1>
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="products.html" class="nav-link">All Products</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link">Categories <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="sarees.html">Sarees</a></li>
-                            <li><a href="kurtis.html">Kurtis</a></li>
-                            <li><a href="blouses.html" class="active">Blouses</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="index.html#contact" class="nav-link">Contact</a>
-                    </li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </div>
-        </nav>
-    </header>
+const fs = require('fs');
+const path = require('path');
+const matter = require('gray-matter');
 
-    <main class="main-content">
-        <div class="container">
-            <div class="page-header category-header">
-                <div class="breadcrumb">
-                    <a href="index.html">Home</a> 
-                    <span class="breadcrumb-separator">/</span> 
-                    <span>Blouses</span>
-                </div>
-                <h1>Blouses Collection</h1>
-                <p>Exquisite blouses to complement your style, from traditional to contemporary designs</p>
-            </div>
+// Build script to generate products.json from markdown files
+function buildProducts() {
+    const productsDir = path.join(__dirname, 'content', 'products');
+    const outputFile = path.join(__dirname, 'products.json');
 
-            <!-- Sort Options -->
-            <div class="category-controls">
-                <div class="sort-options">
-                    <select id="sort-select">
-                        <option value="newest">Newest First</option>
-                        <option value="price-low">Price: Low to High</option>
-                        <option value="price-high">Price: High to Low</option>
-                        <option value="name">Name A-Z</option>
-                    </select>
-                </div>
-            </div>
+    try {
+        // Check if products directory exists
+        if (!fs.existsSync(productsDir)) {
+            console.log('Products directory not found, creating empty products.json');
+            fs.writeFileSync(outputFile, JSON.stringify([]));
+            return;
+        }
 
-            <!-- Products Grid -->
-            <div class="products-container">
-                <div class="products-grid" id="blouses-grid">
-                    <!-- Blouses will be loaded dynamically -->
-                    <div class="empty-state">
-                        <div class="empty-content">
-                            <i class="fas fa-vest"></i>
-                            <h3>No blouses available</h3>
-                            <p>Blouse collection will appear here once added through the admin panel</p>
-                            <a href="admin/index.html" class="cta-button">Add Blouses</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+        // Read all markdown files
+        const files = fs.readdirSync(productsDir)
+            .filter(file => file.endsWith('.md') && !file.startsWith('.'));
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Elegant Threads. All rights reserved.</p>
-        </div>
-    </footer>
+        if (files.length === 0) {
+            console.log('No product files found, creating empty products.json');
+            fs.writeFileSync(outputFile, JSON.stringify([]));
+            return;
+        }
 
-    <script src="js/main.js"></script>
-    <script src="js/products.js"></script>
-    <script>
-        // Initialize blouses page
-        document.addEventListener('DOMContentLoaded', function() {
-            loadCategoryProducts('blouses');
-            initializeSorting();
+        const products = files.map(file => {
+            const filePath = path.join(productsDir, file);
+            const fileContent = fs.readFileSync(filePath, 'utf8');
+            const { data, content } = matter(fileContent);
+            
+            // Create slug from filename
+            const slug = file.replace('.md', '');
+            
+            return {
+                ...data,
+                body: content,
+                slug: slug,
+                filename: file
+            };
         });
-    </script>
-</body>
-</html>
+
+        // Sort products by date (newest first)
+        products.sort((a, b) => {
+            const dateA = new Date(a.date || 0);
+            const dateB = new Date(b.date || 0);
+            return dateB - dateA;
+        });
+
+        // Write products.json
+        fs.writeFileSync(outputFile, JSON.stringify(products, null, 2));
+        console.log(`Generated products.json with ${products.length} products`);
+
+    } catch (error) {
+        console.error('Error building products:', error);
+        // Create empty file on error
+        fs.writeFileSync(outputFile, JSON.stringify([]));
+    }
+}
+
+// Run if called directly
+if (require.main === module) {
+    buildProducts();
+}
+
+module.exports = buildProducts;
