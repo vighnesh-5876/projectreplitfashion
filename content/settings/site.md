@@ -1,9 +1,10 @@
 ---
-title: "Elegant Threads"
-description: "Beautiful Indian fashion - Sarees, Kurtis, and Blouses. Handcrafted designs for the modern woman."
-email: "info@elegantthreads.com"
-phone: "+91 9876543210"
-address: "Mumbai, Maharashtra, India"
+title: The Fashion Designer
+description: Beautiful Indian fashion - Sarees, Kurtis, and Blouses. Handcrafted
+  designs for the modern woman.
+email: info@elegantthreads.com
+phone: +91 9876543210
+address: Mumbai, Maharashtra, India
 social:
   instagram: ""
   facebook: ""
