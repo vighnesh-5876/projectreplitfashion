@@ -1,13 +1,21 @@
 ---
-title: "Floral Print Cotton Kurti"
-category: "kurtis"
+title: Floral Print Cotton Kurti
+category: kurtis
 price: 1200
-image: "/static/uploads/floral-cotton-kurti.jpg"
-description: "Comfortable cotton kurti with beautiful floral prints, perfect for daily wear and casual occasions."
+image: /static/uploads/floral-cotton-kurti.jpg
+gallery:
+  - /static/uploads/screenshot-2025-06-24-152408.png
+description: Comfortable cotton kurti with beautiful floral prints, perfect for
+  daily wear and casual occasions.
 featured: true
 available: true
-tags: ["cotton", "floral", "casual", "comfortable", "daily wear"]
-date: "2025-06-24T11:00:00.000Z"
+tags:
+  - cotton
+  - floral
+  - casual
+  - comfortable
+  - daily wear
+date: 2025-06-24T11:00:00.000Z
 ---
 
 ## Product Details
