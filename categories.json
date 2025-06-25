@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Sarees",
+    "id": "sarees",
+    "description": "Traditional Indian sarees in silk, cotton, and designer varieties",
+    "featured": true
+  },
+  {
+    "name": "Kurtis",
+    "id": "kurtis",
+    "description": "Comfortable and stylish kurtis for daily wear and special occasions",
+    "featured": true
+  },
+  {
+    "name": "Blouses",
+    "id": "blouses",
+    "description": "Designer blouses and cholis to complement your sarees",
+    "featured": true
+  }
+]
