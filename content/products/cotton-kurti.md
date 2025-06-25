@@ -2,7 +2,7 @@
 title: Floral Print Cotton Kurti
 category: kurtis
 price: 1200
-image: /static/uploads/floral-cotton-kurti.jpg
+image: /static/uploads/screenshot-2025-06-15-220156.png
 gallery:
   - /static/uploads/screenshot-2025-06-24-152408.png
 description: Comfortable cotton kurti with beautiful floral prints, perfect for
